@@ -1,0 +1,31 @@
+def encrypt(msg, key): 
+    enc_msg = "" 
+    for ch in msg: 
+        if ch.isupper(): 
+            new_ch = chr((ord(ch) - ord("A") + key) % 26 + ord("A")) 
+            enc_msg += new_ch 
+        elif ch.islower(): 
+            new_ch = chr((ord(ch) - ord("a") + key) % 26 + ord("a")) 
+            enc_msg += new_ch 
+        else:
+            enc_msg += ch  # Keep non-alphabet characters unchanged
+    return enc_msg 
+
+def decrypt(msg, key): 
+    dec_msg = "" 
+    for ch in msg: 
+        if ch.isupper(): 
+            new_ch = chr((ord(ch) - ord("A") - key) % 26 + ord("A")) 
+            dec_msg += new_ch 
+        elif ch.islower(): 
+            new_ch = chr((ord(ch) - ord("a") - key) % 26 + ord("a")) 
+            dec_msg += new_ch 
+        else:
+            dec_msg += ch  # Keep non-alphabet characters unchanged
+    return dec_msg 
+
+text = input("Enter the text to encrypt: ") 
+key = int(input("Enter the key for encryption: ")) 
+enc = encrypt(text, key) 
+dec = decrypt(enc, key) 
+print(f"\nThe encrypted text is: {enc}\nThe decryption of encrypted text is: {dec}") 
